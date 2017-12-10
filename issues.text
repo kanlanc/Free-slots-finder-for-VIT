@@ -1,0 +1,11 @@
+
+
+
+ 1 - In index page add the slots of a1,a2,b1,b2...... and 
+
+link them with the lab slots using ng-model if a1 slot is ticked ther corresponding 
+
+lab slots are also ticked
+    
+
+

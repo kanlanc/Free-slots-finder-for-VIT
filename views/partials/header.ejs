@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Project</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">IEEE CS</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                   <% if(!currentUser){%>
+                        <li><a href="/login">Login</a></li>
+                       
+                    <%}else{%>
+                            <li><a href="#"> Signed In as <%=currentUser.username%> </a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+
+<div class="container">
+<%if(error && error.length>0){%>
+    <div class="alert alert-danger" role="alert">
+        <%=error%>
+    </div>
+<%}%>
+<%if(success && success.length>0){%>
+    <div class="alert alert-success" role="alert">
+        <%=success%>
+    </div>
+<%}%>
+</div>

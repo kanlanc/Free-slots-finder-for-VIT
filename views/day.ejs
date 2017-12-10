@@ -1,0 +1,19 @@
+
+<%include ./partials/header%>
+<h1>On <%=day%></h1>
+
+<% guy.forEach(function(user){%>
+
+    <h4><%=user.name%> is free in the slots <%user.slots.forEach(function(slot){%>
+        L<%=slot%>
+    <%})%>
+    
+    </h4>
+
+<%})%>
+
+<%include ./partials/footer%>
+
+
+
+

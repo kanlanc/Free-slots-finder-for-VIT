@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Project</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+
+
+<body ng-app="myApp" ng-controller="myCtrl">
+
+<nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">IEEE CS</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                   <% if(!currentUser){%>
+                        <li><a href="/login">Login</a></li>
+                    <%}else{%>
+                            <li><a href="#"> Signed In as <%=currentUser.username%> </a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        <%}%>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+
+<div class="container">
+<%if(error && error.length>0){%>
+    <div class="alert alert-danger" role="alert">
+        <%=error%>
+    </div>
+<%}%>
+<%if(success && success.length>0){%>
+    <div class="alert alert-success" role="alert">
+        <%=success%>
+    </div>
+<%}%>
+</div>
+
+
+<form action="/user" method="POST">
+
+<div class="container">
+
+<div class="form-group col-md-6">
+<input type="text" class="form-control" name="name" placeholder="Name">
+</div>
+
+<div class="form-group col-md-6">
+<input type="text" class="form-control"  name="reg" placeholder="Registration number">
+</div>
+<div class="row">
+<!-- 
+<div class="col-md-2" ng-repeat="x in records">
+
+
+    <input type="hidden" name="slot[{{x}}]" value="0">
+     <input type="checkbox" name="slot["+{{x}}+"]" value={{x}}>
+     <input type="checkbox" name="slot[{{x}}]" value={{x}}>
+     
+     
+     
+     <input type="checkbox" ng-model="slot[{{x}}]" value={{x}}>
+
+
+     <input type="checkbox" name="{{slot[x]}}"  value={{x}}>
+    <label>L {{x}}</label>
+    
+</div> -->
+
+<label ng-repeat="x in records" class="col-md-2">
+        <input
+          type="checkbox"
+          name="slot[]"
+          value="{{x}}"
+          ng-checked="selection.indexOf(x) > -1"
+          ng-click="toggleSelection(x)"
+        >L {{x}}
+      </label>
+
+</div>
+
+<button type="submit" class="btn btn-primary">Submit</button>
+
+</div>
+
+
+
+
+</form>
+
+
+
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl",["$scope",function($scope) {
+var record=[];
+for(var i=0;i<61;i++)
+{
+    record.push(i);
+}
+
+
+ 
+  $scope.selection = [];
+
+  
+  $scope.toggleSelection = function toggleSelection(x) {
+    var idx = $scope.selection.indexOf(x);
+
+    // Is currently selected
+    if (idx > -1) {
+      $scope.selection.splice(idx, 1);
+    }
+
+    // Is newly selected
+    else {
+      $scope.selection.push(x);
+    }
+  };
+
+$scope.records=record;
+
+}]);
+</script>
+
+</body>
+</html>
