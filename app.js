@@ -5,6 +5,7 @@ var LocalStrategy = require("passport-local");
 var session = require('express-session');
 var methodOverride = require('method-override');
 var flash = require("connect-flash");
+require('dotenv').config();
 
 
 
@@ -16,7 +17,12 @@ var Admin = require('./models/admin');
 var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-mongoose.connect('mongodb://localhost:27017/ieee_proj');
+
+mongoose.connect('mongodb://'+process.env.user+':'+process.env.password+'@ds249787.mlab.com:49787/freeslotsfinder');
+
+
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
@@ -46,8 +52,8 @@ app.use(function (req, res, next) {
 });
 
 // Admin.create({
-//     username:"saivicky2015",
-//     password:"abc12345"
+//     username:"",
+//     password:""
 // }, function(err,user){
 //     if(err)
 //     {
@@ -336,6 +342,6 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login");
 }
 
-app.listen(3000, function () {
-    console.log(' Server listening on port 3000!');
+app.listen(process.env.PORT ||3000, function () {
+    console.log('Server listening on port 3000!');
 });
