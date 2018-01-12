@@ -83,7 +83,7 @@
 <label ng-repeat="x in records" class="col-md-2">
         <input
           type="checkbox"
-          name="slot[]"
+          name="slot[{{x}}]"
           value="{{x}}"
           ng-checked="selection.indexOf(x) > -1"
           ng-click="toggleSelection(x)"
@@ -107,7 +107,7 @@
 var app = angular.module("myApp", []);
 app.controller("myCtrl",["$scope",function($scope) {
 var record=[];
-for(var i=0;i<61;i++)
+for(var i=1;i<61;i++)
 {
     record.push(i);
 }

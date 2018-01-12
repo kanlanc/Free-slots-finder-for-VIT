@@ -80,6 +80,8 @@ app.use(function (req, res, next) {
 // });    
 // });
 
+
+
 // Index page
 app.get('/', function (req, res) {
     res.render("index");
@@ -148,7 +150,7 @@ app.get('/monday', function (req, res) {
     var mon_slots = [];
     var i, j;
 
-    for (i = 0; i < 7; i++)
+    for (i = 1; i < 7; i++)
         mon_slots.push(i);
 
 
